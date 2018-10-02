@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">OD App</string>
+    <string name="no_email">Please enter the Email ID</string>
+    <string name="no_password">Please enter the Password</string>
+    <string name="pass_length">Password length should have atleast six characters</string>
+
+    <string-array name="Department">
+        <item>CSE</item>
+        <item>MECH</item>
+        <item>ECE</item>
+        <item>MBA</item>
+    </string-array>
+
+    <string-array name="Year">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="Section">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+    </string-array>
+</resources>
