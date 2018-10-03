@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        onStart();
 
         mAuth = FirebaseAuth.getInstance();
         email = (EditText) findViewById(R.id.Semail);
@@ -123,4 +122,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user=mAuth.getCurrentUser();
+        if (user!=null){
+            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

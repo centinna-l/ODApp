@@ -26,6 +26,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Name"
+        android:paddingLeft="2dp"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,15 +36,17 @@
         android:id="@+id/RegisterNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="2dp"
+        android:paddingLeft="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
         android:gravity="center"
         android:hint="Register No"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name" />
 
@@ -51,13 +54,12 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        android:padding="3dp"
+        android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RegisterNo">
 
@@ -65,7 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="5dp">
+            android:paddingTop="5dp"
+            android:paddingLeft="2dp">
 
             <TextView
                 android:id="@+id/department"
@@ -138,11 +141,7 @@
     <EditText
         android:id="@+id/Reason"
         android:layout_width="match_parent"
-        android:layout_height="97dp"
-        android:layout_marginBottom="212dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="107dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
         android:gravity="start"
@@ -152,18 +151,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.296" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="2dp"
         android:orientation="horizontal"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Reason">
 
@@ -193,20 +193,16 @@
             tools:layout_editor_absoluteY="396dp" />
     </LinearLayout>
 
-    <EditText
+    <Spinner
         android:id="@+id/ClassAdvisor"
-        android:layout_width="match_parent"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/edittext_background"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="ClassAdvisor"
-        android:inputType="textEmailAddress"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:entries="@array/classAdvisor"
+        app:layout_constraintBottom_toTopOf="@+id/submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
@@ -225,6 +221,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ClassAdvisor"
         app:layout_constraintVertical_bias="0.888" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

@@ -32,8 +32,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private Button signOut,submit;
     private TextView odStatus;
-    private EditText name,regNo,reason,from,to,classAdvisor;
-    private Spinner department,year,section;
+    private EditText name,regNo,reason,from,to;
+    private Spinner department,year,section,classAdvisor;
     private FirebaseAuth mAuth;
     String getdepartment,getYear,getSection,getName,getRegNo,getReason,getFrom,getTo,getClassAdvisor;
     String hashData,child;
@@ -54,10 +54,11 @@ public class HomeActivity extends AppCompatActivity {
         reason=(EditText)findViewById(R.id.Reason);
         from=(EditText)findViewById(R.id.From);
         to=(EditText)findViewById(R.id.To);
-        classAdvisor=(EditText)findViewById(R.id.ClassAdvisor);
+        classAdvisor=(Spinner) findViewById(R.id.ClassAdvisor);
         hToolbar=(Toolbar)findViewById(R.id.home_actionbar);
         setSupportActionBar(hToolbar);
         getSupportActionBar().setTitle("OD Form");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance().getReference();
         submit.setOnClickListener(new View.OnClickListener() {
@@ -66,13 +67,13 @@ public class HomeActivity extends AppCompatActivity {
                 getdepartment=String.valueOf(department.getSelectedItem().toString().trim());
                 getYear=String.valueOf(year.getSelectedItem().toString().trim());
                 getSection=String.valueOf(section.getSelectedItem().toString().trim());
+                getClassAdvisor=String.valueOf(classAdvisor.getSelectedItem().toString().trim());
                  getName=name.getText().toString().trim();
                  getRegNo=regNo.getText().toString().trim();
                  getRegNo=getRegNo.toUpperCase();
                  getReason=reason.getText().toString().trim();
                  getFrom=from.getText().toString().trim();
                  getTo=to.getText().toString().trim();
-                 getClassAdvisor=classAdvisor.getText().toString().trim();
                 child=getdepartment+" "+getSection+"-"+getYear;
                  hashData=getRegNo+"~"+getName+"!"+getdepartment+"@"+getYear+"#"+getReason+"$"+getFrom+"%"+getTo+"^"+getClassAdvisor+"&"+status;
                  if (TextUtils.isEmpty(getName)||TextUtils.isEmpty(getRegNo)||TextUtils.isEmpty(getReason)||TextUtils.isEmpty(getFrom)||TextUtils.isEmpty(getTo)||TextUtils.isEmpty(getClassAdvisor)){
@@ -108,6 +109,9 @@ public class HomeActivity extends AppCompatActivity {
         if (item.getItemId()==R.id.main_logout){
             FirebaseAuth.getInstance().signOut();
             updateUI();
+        }
+        if (item.getItemId()==R.id.main_logs){
+            startActivity(new Intent(HomeActivity.this,LogsActivity.class));
         }
         return true;
     }

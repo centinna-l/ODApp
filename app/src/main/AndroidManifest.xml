@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".HomeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp"
-            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".SignUp"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".ForgotActivity" />
+        <activity android:name=".LogsActivity"></activity>
     </application>
 
 </manifest>
