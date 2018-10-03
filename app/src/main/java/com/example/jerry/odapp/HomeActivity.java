@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                      Toast.makeText(HomeActivity.this, "Enter details in the missing field", Toast.LENGTH_SHORT).show();
                      return;
                  }
-                 mFirebaseDatabase=FirebaseDatabase.getInstance().getReference().child(child);
+                 mFirebaseDatabase=FirebaseDatabase.getInstance().getReference().child(getClassAdvisor);
                  mFirebaseDatabase.push().setValue(hashData);
             }
         });
