@@ -30,14 +30,13 @@ import static android.content.ContentValues.TAG;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button signOut,submit;
+    private Button signOut, submit;
     private TextView odStatus;
-    private EditText name,regNo,reason,from,to;
-    private Spinner department,year,section,classAdvisor;
+    private EditText name, regNo, reason, from, to, classAdvisor;
+    private Spinner department, year, section;
     private FirebaseAuth mAuth;
-    String getdepartment,getYear,getSection,getName,getRegNo,getReason,getFrom,getTo,getClassAdvisor;
-    String hashData,child;
-    boolean status=false;
+    String getdepartment, getYear, getSection, getName, getRegNo, getReason, getFrom, getTo, getClassAdvisor;
+    boolean status = false;
     private DatabaseReference mFirebaseDatabase;
     private Toolbar hToolbar;
 
@@ -45,43 +44,44 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        department=(Spinner)findViewById(R.id.Dept);
-        year=(Spinner)findViewById(R.id.year);
-        section=(Spinner)findViewById(R.id.Sec);
-        submit=(Button)findViewById(R.id.submit);
-        name=(EditText)findViewById(R.id.Name);
-        regNo=(EditText)findViewById(R.id.RegisterNo);
-        reason=(EditText)findViewById(R.id.Reason);
-        from=(EditText)findViewById(R.id.From);
-        to=(EditText)findViewById(R.id.To);
-        classAdvisor=(Spinner) findViewById(R.id.ClassAdvisor);
-        hToolbar=(Toolbar)findViewById(R.id.home_actionbar);
+        department = (Spinner) findViewById(R.id.Dept);
+        year = (Spinner) findViewById(R.id.year);
+        section = (Spinner) findViewById(R.id.Sec);
+        submit = (Button) findViewById(R.id.submit);
+        name = (EditText) findViewById(R.id.Name);
+        regNo = (EditText) findViewById(R.id.RegisterNo);
+        reason = (EditText) findViewById(R.id.Reason);
+        from = (EditText) findViewById(R.id.From);
+        to = (EditText) findViewById(R.id.To);
+        classAdvisor = (EditText) findViewById(R.id.ClassAdviosr);
+        hToolbar = (Toolbar) findViewById(R.id.home_actionbar);
         setSupportActionBar(hToolbar);
         getSupportActionBar().setTitle("OD Form");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mAuth=FirebaseAuth.getInstance();
-        mFirebaseDatabase=FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getdepartment=String.valueOf(department.getSelectedItem().toString().trim());
-                getYear=String.valueOf(year.getSelectedItem().toString().trim());
-                getSection=String.valueOf(section.getSelectedItem().toString().trim());
-                getClassAdvisor=String.valueOf(classAdvisor.getSelectedItem().toString().trim());
-                 getName=name.getText().toString().trim();
-                 getRegNo=regNo.getText().toString().trim();
-                 getRegNo=getRegNo.toUpperCase();
-                 getReason=reason.getText().toString().trim();
-                 getFrom=from.getText().toString().trim();
-                 getTo=to.getText().toString().trim();
-                child=getdepartment+" "+getSection+"-"+getYear;
-                 hashData=getRegNo+"~"+getName+"!"+getdepartment+"@"+getYear+"#"+getReason+"$"+getFrom+"%"+getTo+"^"+getClassAdvisor+"&"+status;
-                 if (TextUtils.isEmpty(getName)||TextUtils.isEmpty(getRegNo)||TextUtils.isEmpty(getReason)||TextUtils.isEmpty(getFrom)||TextUtils.isEmpty(getTo)||TextUtils.isEmpty(getClassAdvisor)){
-                     Toast.makeText(HomeActivity.this, "Enter details in the missing field", Toast.LENGTH_SHORT).show();
-                     return;
-                 }
-                 mFirebaseDatabase=FirebaseDatabase.getInstance().getReference().child(getClassAdvisor);
-                 mFirebaseDatabase.push().setValue(hashData);
+                getdepartment = String.valueOf(department.getSelectedItem().toString().trim());
+                getYear = String.valueOf(year.getSelectedItem().toString().trim());
+                getSection = String.valueOf(section.getSelectedItem().toString().trim());
+                getClassAdvisor = classAdvisor.getText().toString().trim();
+                getName = name.getText().toString().trim();
+                getRegNo = regNo.getText().toString().trim();
+                getRegNo = getRegNo.toUpperCase();
+                getReason = reason.getText().toString().trim();
+                getFrom = from.getText().toString().trim();
+                getTo = to.getText().toString().trim();
+                if (TextUtils.isEmpty(getName) || TextUtils.isEmpty(getRegNo) || TextUtils.isEmpty(getReason) || TextUtils.isEmpty(getFrom) || TextUtils.isEmpty(getTo) || TextUtils.isEmpty(getClassAdvisor)) {
+                    Toast.makeText(HomeActivity.this, "Enter details in the missing field", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ApplicationHandler applicationHandler = new ApplicationHandler(getName, getRegNo, getdepartment, getSection, getYear, getReason, getFrom, getTo, getClassAdvisor, status);
+                String email = getClassAdvisor.substring(0, getClassAdvisor.indexOf('@')).trim();
+                Toast.makeText(HomeActivity.this, email, Toast.LENGTH_LONG).show();
+                mFirebaseDatabase = FirebaseDatabase.getInstance().getReference().child(email);
+                mFirebaseDatabase.push().setValue(applicationHandler);
             }
         });
 
@@ -90,33 +90,34 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser user= mAuth.getCurrentUser();
-        if (user==null){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
             updateUI();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-         super.onCreateOptionsMenu(menu);
-         getMenuInflater().inflate(R.menu.main_menu,menu);
-         return true;
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        if (item.getItemId()==R.id.main_logout){
+        if (item.getItemId() == R.id.main_logout) {
             FirebaseAuth.getInstance().signOut();
             updateUI();
         }
-        if (item.getItemId()==R.id.main_logs){
-            startActivity(new Intent(HomeActivity.this,LogsActivity.class));
+        if (item.getItemId() == R.id.main_logs) {
+            startActivity(new Intent(HomeActivity.this, LogsActivity.class));
         }
         return true;
     }
-    public void updateUI(){
-        Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
+
+    public void updateUI() {
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

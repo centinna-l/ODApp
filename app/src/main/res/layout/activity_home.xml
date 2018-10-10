@@ -147,11 +147,9 @@
         android:gravity="start"
         android:hint="Reason"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -193,33 +191,35 @@
             tools:layout_editor_absoluteY="396dp" />
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/ClassAdvisor"
-        android:layout_width="368dp"
+    <EditText
+        android:id="@+id/ClassAdviosr"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:entries="@array/classAdvisor"
-        app:layout_constraintBottom_toTopOf="@+id/submit"
+        android:hint="Class Advisor Email"
+        android:gravity="center"
+        android:background="@drawable/edittext_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
         android:text="Submit"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClassAdvisor"
+        app:layout_constraintTop_toBottomOf="@+id/ClassAdviosr"
         app:layout_constraintVertical_bias="0.888" />
 
 
