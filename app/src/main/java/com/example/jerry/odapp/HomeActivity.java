@@ -25,20 +25,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.w3c.dom.Text;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button signOut, submit;
+    private Button submit;
     private TextView odStatus;
     private EditText name, regNo, reason, from, to, classAdvisor;
     private Spinner department, year, section;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String emailName;
     String getdepartment, getYear, getSection, getName, getRegNo, getReason, getFrom, getTo, getClassAdvisor;
     boolean status = false;
     private DatabaseReference mFirebaseDatabase;
     private Toolbar hToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,9 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("OD Form");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAuth = FirebaseAuth.getInstance();
+        user=mAuth.getCurrentUser();
+        emailName = user.getEmail();
+        emailName = emailName.substring(0, emailName.indexOf('@'));
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +89,10 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, email, Toast.LENGTH_LONG).show();
                 mFirebaseDatabase = FirebaseDatabase.getInstance().getReference().child(email);
                 mFirebaseDatabase.push().setValue(applicationHandler);
+                Pending pending=new Pending(getName,getReason,getRegNo,getSection);
+                mFirebaseDatabase=FirebaseDatabase.getInstance().getReference().child(emailName);
+                mFirebaseDatabase.push().setValue(pending);
+                startActivity(new Intent(HomeActivity.this,LogsActivity.class));
             }
         });
 
