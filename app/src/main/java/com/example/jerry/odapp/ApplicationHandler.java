@@ -4,6 +4,32 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class ApplicationHandler {
+
+    public String regNo;
+    public String name;
+    public String dept,sec,year;
+    public String reason,from,to;
+    public String classAdvisor;
+    public String emailName;
+    public String status;
+
+    public ApplicationHandler(){
+
+    }
+    public ApplicationHandler(String name,String regNo,String dept,String sec,String year,String reason,String from,String to,String classAdvisor,String emailName,String status){
+        this.name=name;
+        this.regNo=regNo;
+        this.dept=dept;
+        this.sec=sec;
+        this.year=year;
+        this.reason=reason;
+        this.from=from;
+        this.to=to;
+        this.classAdvisor=classAdvisor;
+        this.emailName=emailName;
+        this.status=status;
+    }
+
     public String getRegNo() {
         return regNo;
     }
@@ -76,33 +102,21 @@ public class ApplicationHandler {
         this.classAdvisor = classAdvisor;
     }
 
-    public Boolean getStatus() {
+
+    public String getEmailName() {
+        return emailName;
+    }
+
+    public void setEmailName(String emailName) {
+        this.emailName = emailName;
+    }
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String regNo;
-    public String name;
-    public String dept,sec,year;
-    public String reason,from,to;
-    public String classAdvisor;
-    public Boolean status;
-    public ApplicationHandler(){
 
-    }
-    public ApplicationHandler(String name,String regNo,String dept,String sec,String year,String reason,String from,String to,String classAdvisor,Boolean status){
-        this.name=name;
-        this.regNo=regNo;
-        this.dept=dept;
-        this.sec=sec;
-        this.year=year;
-        this.reason=reason;
-        this.from=from;
-        this.to=to;
-        this.classAdvisor=classAdvisor;
-        this.status=status;
-    }
 }

@@ -8,15 +8,29 @@ public class Pending {
     public String rsn;
     public String reg;
     public String stn;
+    public String dte;
+    public String emailName;
+    public String status;
 
     public Pending() {
     }
 
-    public Pending(String nme, String rsn, String reg, String stn) {
+    public Pending(String nme, String rsn, String reg, String stn,String dte,String emailName,String status) {
         this.nme = nme;
         this.rsn = rsn;
         this.reg = reg;
         this.stn = stn;
+        this.dte=dte;
+        this.emailName=emailName;
+        this.status=status;
+    }
+
+    public String getDte() {
+        return dte;
+    }
+
+    public void setDte(String dte) {
+        this.dte = dte;
     }
     public String getNme() {
         return nme;
@@ -49,4 +63,20 @@ public class Pending {
     public void setStn(String stn) {
         this.stn = stn;
     }
+    public String getEmailName() {
+        return emailName;
+    }
+
+    public void setEmailName(String emailName) {
+        this.emailName = emailName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }
